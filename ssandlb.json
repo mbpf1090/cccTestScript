@@ -297,14 +297,14 @@
                           {
                             "id": "[resourceId('Microsoft.Network/loadBalancers/backendAddressPools', variables('loadBalancerName'), variables('bePoolName'))]"
                           }
-                        ],
-                        "loadBalancerInboundNatPools": [
-                          {
-                            "id": "[resourceId('Microsoft.Network/loadBalancers/inboundNatPools', variables('loadBalancerName'), variables('natPoolName'))]"
-                          }//,
-                          //{
-                          //  "id": "[resourceId('Microsoft.Network/loadBalancers/inboundNatPools', variables('loadBalancerName'), variables('natpool2Name'))]"
-                          //}
+                        // ]//,
+                        // //"loadBalancerInboundNatPools": [
+                        //   //{
+                        //   //  "id": "[resourceId('Microsoft.Network/loadBalancers/inboundNatPools', variables('loadBalancerName'), variables('natPoolName'))]"
+                        //   //}
+                        //   //{
+                        //   //  "id": "[resourceId('Microsoft.Network/loadBalancers/inboundNatPools', variables('loadBalancerName'), variables('natpool2Name'))]"
+                        //   //}
                         ]
                       }
                     }
