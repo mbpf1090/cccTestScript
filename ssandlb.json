@@ -80,9 +80,11 @@
     "subnetName": "[concat(parameters('vmssName'), 'subnet')]",
     "loadBalancerName": "[concat(parameters('vmssName'), 'lb')]",
     "publicIPAddressID": "[resourceId('Microsoft.Network/publicIPAddresses',variables('publicIPAddressName'))]",
+    "lbProbeID": "[resourceId('Microsoft.Network/loadBalancers/probes',variables('loadBalancerName'), 'tcpProbe')]",
     "natPoolName": "[concat(parameters('vmssName'), 'natpool')]",
     "natpool2Name": "[concat(parameters('vmssName'), 'natpool2')]",
     "bePoolName": "[concat(parameters('vmssName'), 'bepool')]",
+    "lbPoolID": "[resourceId('Microsoft.Network/loadBalancers/backendAddressPools',variables('loadBalancerName'),variables('bePoolName'))]",
     "natStartPort": 50000,
     "natEndPort": 50120,
     "natBackendPort": 22,
@@ -188,10 +190,42 @@
               "protocol": "Tcp",
               "frontendPortRangeStart": 9000,
               "frontendPortRangeEnd": 9120,
-              "backendPort": 9000
+              "backendPort": 80
             }
           }
-        ]
+        ],
+        "loadBalancingRules": [
+                    {
+                        "name": "LBRule",
+                        "properties": {
+                            "frontendIPConfiguration": {
+                                "id": "[variables('frontEndIPConfigID')]"
+                            },
+                            "backendAddressPool": {
+                                "id": "[variables('lbPoolID')]"
+                            },
+                            "protocol": "Tcp",
+                            "frontendPort": 80,
+                            "backendPort": 80,
+                            "enableFloatingIP": false,
+                            "idleTimeoutInMinutes": 5,
+                            "probe": {
+                                "id": "[variables('lbProbeID')]"
+                            }
+                        }
+                    }
+                ],
+                "probes": [
+                    {
+                        "name": "tcpProbe",
+                        "properties": {
+                            "protocol": "Tcp",
+                            "port": 80,
+                            "intervalInSeconds": 5,
+                            "numberOfProbes": 2
+                        }
+                    }
+                ]
       }
     },
     {
