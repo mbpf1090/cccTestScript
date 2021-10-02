@@ -274,7 +274,7 @@
                       "[uri(parameters('_artifactsLocation'), concat('run.sh', parameters('_artifactsLocationSasToken')))]"
                       //"[uri(parameters('_artifactsLocation'), concat('workserver.py', parameters('_artifactsLocationSasToken')))]"
                     ],
-                    "commandToExecute": "bash run.sh"
+                    "commandToExecute": "./run.sh"
                   }
                 }
               }
