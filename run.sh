@@ -2,6 +2,7 @@
 
 apt-get -qq update && apt-get -qq --assume-yes  install apache2
 apt-get -qq --assume-yes  install php libapache2-mod-php php-mysql
+apt-get -qq --assume-yes  install htop stress
 
 rm /var/www/html/index.html
 #touch /var/www/html/index.php
